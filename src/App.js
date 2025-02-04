@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import Instructions from './components/Instructions';
+import Leaderboard from './components/Leaderboard';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path = "/" element = {<Dashboard />}></Route>
             <Route path = "/instructions" element = {<Instructions />}></Route>
+            <Route path = "/leaderboard" element = {<Leaderboard />}></Route>
           </Routes>
         </div>
 

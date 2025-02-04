@@ -16,35 +16,50 @@ const tests = [
 ];
 
 function Dashboard() {
+  const navigate = useNavigate();
 
-  // initialize the navigate function
-  const navigate = useNavigate(); 
+  const handleLeaderboardClick = () =>{
+    navigate("/leaderboard");
+  }
+
+  const handleResultAnalysisClick = () => {
+    navigate("/result-analysis");
+  }
+
+  const handleViewProgressClick = () => {
+    navigate("/view-progress");
+  }
 
   const handleStartTest = () => {
     navigate("/instructions");
   };
 
   return (
-    <div className="grid-container">
-      {/* it will create an array of 3 size, as we want to have 3 tests in one row */}
-      {Array.from({length : Math.ceil(tests.length/3)}, (_, rowIndex) => (
-        // this will be for each row
-        <div className = "grid-row" key = {rowIndex}>
-          {/* it will select the test which needs to be displayed from tests object */}
-          {tests.slice(rowIndex * 3, rowIndex*3 + 3).map((test)=>(
-            // this will be for each grid
-            <div className = "grid-col-3" key = {test.id}>
-              <h2>{test.name}</h2>
-              <div className = "test-details-container">
-                <p className = "test-details">Duration : {test.duration}</p>
-                <p className = "test-details">Total : {test.marks}</p>
-                <button className = "test-button" onClick={handleStartTest}>Start Test</button>
-              </div>
+    <div className="dashboard-container">
+      <div className="left-panel">
+        <h3 className = "left-panel-box" onClick = {handleLeaderboardClick}>Leaderboard</h3>
+        <h3 className = "left-panel-box" onClick = {handleResultAnalysisClick}>Result Analysis</h3>
+        <h3 className = "left-panel-box" onClick = {handleViewProgressClick}>View Progress</h3>
+      </div>
+
+      <div className="right-panel">
+        <div className="grid-container">
+          {Array.from({length: Math.ceil(tests.length/3)}, (_, rowIndex) => (
+            <div className="grid-row" key={rowIndex}>
+              {tests.slice(rowIndex * 3, rowIndex * 3 + 3).map((test) => (
+                <div className="grid-col-3" key={test.id} onClick={() => handleStartTest()}>
+                  <h2>{test.name}</h2>
+                  <div className="test-details-container">
+                    <p className="test-details">Duration: {test.duration}</p>
+                    <p className="test-details">Total: {test.marks}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           ))}
-          </div>
-      ))}
-  </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
